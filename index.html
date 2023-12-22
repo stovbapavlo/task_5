@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://raw.githubusercontent.com/SortableJS/Sortable/master/Sortable.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+<div class="header">
+    <h2>My To Do List</h2>
+    <div class="input-container">
+        <input type="text" id="listTitle" placeholder="List Title...">
+        <span class="addBtn" onclick="newList()">Add List</span>
+    </div>
+</div>
+<div class="container" id="listsContainer">
+    <!-- Lists will be dynamically added here -->
+</div>
+</body>
+</html>
