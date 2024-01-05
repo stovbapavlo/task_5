@@ -6,13 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    var lists = document.querySelectorAll(".sortable");
-    lists.forEach(function (list) {
-        new Sortable(list, {
-            group: 'shared',
-            animation: 150
-        });
-    });
+    var listsContainer = document.getElementById("listsContainer");
 
     updateAddListButton();
 });
@@ -24,6 +18,21 @@ function updateAddListButton() {
     var addListButton = document.querySelector(".addBtn");
     addListButton.style.display = listsCounter >= maxLists ? "none" : "block";
 }
+function createSortableList(ul) {
+    new Sortable(ul, {
+        group: {
+            name: 'list-group', // Унікальна група для кожного списку
+            pull: true,
+            put: true
+        },
+        animation: 150
+    });
+}
+
+// Створіть Sortable для всіх існуючих списків
+var existingLists = document.querySelectorAll('.sortable');
+existingLists.forEach(createSortableList);
+
 
 function newList() {
     if (listsCounter >= maxLists) {
@@ -53,40 +62,32 @@ function newList() {
             this.value = "";
         }
     };
-    document.getElementById("listTitle").value = "";
 
+    document.getElementById("listTitle").value = "";
     updateAddListButton();
+
     var newListUl = document.createElement("ul");
     newListUl.classList.add("sortable");
-    newListUl.dataset.listType = listTitle.toLowerCase().replace(/\s/g, ''); // Унікальний ідентифікатор для кожного списку
+    newListUl.dataset.listType = listTitle.toLowerCase().replace(/\s/g, '');
 
     newListDiv.appendChild(newListTitle);
     newListDiv.appendChild(newListInput);
     newListDiv.appendChild(newListUl);
 
-    var listsContainer = document.getElementById("listsContainer");
-
-    // Перевіряємо, чи не перевищено допустиму кількість списків
     if (listsCounter >= maxLists) {
         alert("You cannot add more than " + maxLists + " lists.");
     } else {
-        // Додаємо новий список як зазвичай
         listsContainer.appendChild(newListDiv);
 
-        // Ініціалізуємо Sortable для новоствореного списку
-        new Sortable(newListUl, {
-            group: 'shared',
-            animation: 150
-        });
+        // Створіть Sortable для нового списку
+        createSortableList(newListUl);
 
         listsCounter++;
     }
 
-    // Очищаємо поле вводу після додавання списку
     document.getElementById("listTitle").value = "";
-
-    // Перевірте і оновіть видимість кнопки "Add List" після створення нового списку
     updateAddListButton();
+
 }
 
 function newElement(listType, taskText) {
@@ -99,7 +100,6 @@ function newElement(listType, taskText) {
     var li = document.createElement("li");
     li.textContent = taskText;
 
-    // Створюємо кнопку видалення
     var deleteBtn = document.createElement("span");
     deleteBtn.textContent = "\u00D7";
     deleteBtn.classList.add("deleteBtn");
@@ -107,7 +107,6 @@ function newElement(listType, taskText) {
         ul.removeChild(li);
     };
 
-    // Додаємо текстовий вміст та кнопку видалення до елемента списку
     li.appendChild(deleteBtn);
     li.appendChild(document.createTextNode(" "));
 

@@ -124,45 +124,45 @@ ul.sortable li {
 }
 
 ul.sortable li {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    user-select: none;
+    cursor: grab;
     margin: 5px;
     padding: 10px;
     border-radius: 5px;
-    cursor: pointer;
     transition: background-color 0.3s;
-    position: relative; /* Додаємо позицію relative для позиціонування абсолютних елементів */
+    position: relative;
+    background-color: #f0f8ff;
+    border: 1px solid #4682b4;
 
-    /* Стилі для кнопки видалення */
     .deleteBtn {
         position: absolute;
-        right: 10px; /* Розташовуємо з правого краю */
+        right: 10px;
         top: 50%;
         transform: translateY(-50%);
         color: #555555;
         cursor: pointer;
         font-size: 18px;
-        transition: color 1s, box-shadow 0.3s; /* Додаємо анімацію зміни кольору та box-shadow */
+        transition: color 1s, box-shadow 0.3s;
         padding: 5px;
     }
 
-    /* Підсвічування кнопки видалення при наведенні */
     .deleteBtn:hover {
         color: darkred;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); /* Додаємо підсвічування навколо клавіші */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
     }
 }
-/* Інші стилі залишаються незмінними */
+ul.sortable li:active {
+    cursor: grabbing;
+}
 
 .list.auto-added {
-    /* Стилі для ліста, який додається автоматично */
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     color: #333;
 }
 .sortable-ghost {
-    opacity: 0.5; /* Наприклад, зменште прозорість для підкреслення "привиду" */
-    background-color: #ccc; /* Змініть колір фону за вашим вибором */
+    opacity: 0.5;
+    background-color: #ccc;
 }
 
 
